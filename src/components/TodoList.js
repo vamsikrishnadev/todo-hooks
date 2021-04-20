@@ -1,13 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import TodoForm from './TodoForm'
-
 
 function TodoList(){
     const [todos,setTodos]=useState([])
     const [todosCount,setTodosCount]=useState(0)
+    
 
     useEffect(()=>{
         console.log("todos count updated")
+        
         setTodosCount(todos.length)
     },[todos])
     

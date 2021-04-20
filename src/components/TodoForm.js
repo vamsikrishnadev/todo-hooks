@@ -1,11 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 
 function TodoForm(props){
+    const focusinput=useRef()
     const [input, setInput]=useState('')
     const handleChange=(e)=>{
-        
         setInput(e.target.value)
     }
+    //for focus
+    const focusTxt=(e)=>{
+        e.preventDefault()
+        focusinput.current.focus()
+    }
+    const prevTodo=useRef('')
 
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -16,10 +22,15 @@ function TodoForm(props){
         setInput('')
 
     }
+    useEffect(()=>{
+        prevTodo.current=input
+    },[input])
     return(
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Add todo" value={input} name="text" onChange={handleChange}></input>
+            <div>previous todo title: {prevTodo.current}</div>
+            <input type="text" ref={focusinput} placeholder="Add todo" value={input} name="text" onChange={handleChange}></input>
             <button >Add Todo</button>
+            <button onClick={focusTxt}>Focus</button>
         </form>
     )
 }
