@@ -4,9 +4,11 @@ import TodoForm from './TodoForm'
 
 function TodoList(){
     const [todos,setTodos]=useState([])
+    const [todosCount,setTodosCount]=useState(0)
 
     useEffect(()=>{
         console.log("todos count updated")
+        setTodosCount(todos.length)
     },[todos])
     
     const addTodo=(todo)=>{
@@ -28,6 +30,7 @@ function TodoList(){
     return(
         <div>
             <div>What's the plan today</div>
+            <div>Number of todos {todosCount}</div>
             <TodoForm onSubmit={addTodo}/>
             {
                 todos.map((todo,index)=>(
